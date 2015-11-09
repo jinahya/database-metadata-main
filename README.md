@@ -3,7 +3,7 @@
 ````
 mvn -Ddriver.groupId= -Ddrier.artifactId= -Ddriver.version= clean package
 ````
-Some profiles prepared for various jdbc drivers.
+Some profiles are prepared for various jdbc drivers.
 ````
 mvn help:all-profiles
 mvn -Pmariadb clean package
