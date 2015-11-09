@@ -17,5 +17,68 @@ Executes the final jar with following arguments.
   4. filename
   5. suppression*
 ```
-java -jar databse-metadata-main-....jar jdbc/mysql://... user pass out.xml table/tablePrivileges
+java -jar databse-metadata-main-....jar <url> <user> <pass> <outfile> suppression1 suppression2
+```
+## examples
+### derby
+```
+$ mvn -Pderby clean package
+$ java -jar target/...-derby-....jar "jdbc:derby:memory:test;create=true" "" "" \
+> target/derby.metadata.xml
+...
+$ head target/derby.metadata.xml 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://github.com/jinahya/sql/database/metadata/bind">
+    <allProceduresAreCallable>true</allProceduresAreCallable>
+    <allTablesAreSelectable>true</allTablesAreSelectable>
+    <autoCommitFailureClosesAllResultSets>true</autoCommitFailureClosesAllResultSets>
+    <catalog>
+        <tableCat></tableCat>
+        <schema>
+            <tableSchem>APP</tableSchem>
+        </schema>
+$
+```
+### h2
+```
+$ mvn -Ph2 clean package
+$ java -jar target/...-h2-....jar jdbc:h2:mem:test "" "" target/h2.metadata.xml \
+> schema/functions \
+> column/isGeneratedcolumn \
+> table/pseudoColumns \
+> metadata/generatedKeyAlwaysReturned
+...
+$ head target/h2.metadata.xml 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://github.com/jinahya/sql/database/metadata/bind">
+    <allProceduresAreCallable>true</allProceduresAreCallable>
+    <allTablesAreSelectable>true</allTablesAreSelectable>
+    <autoCommitFailureClosesAllResultSets>false</autoCommitFailureClosesAllResultSets>
+    <catalog>
+        <tableCat>TEST</tableCat>
+        <schema tableCatalog="TEST">
+            <tableSchem>INFORMATION_SCHEMA</tableSchem>
+            <table tableCat="TEST" tableSchem="INFORMATION_SCHEMA">
+$ 
+```
+### hsqldb
+```
+$ mvn -Phsqldb clean package
+$ java -jar target/...-hsqldb-....jar jdbc:hsqldb:mem:test "" "" target/hsqldb.metadata.xml \
+> table/pseudoColumns
+...
+$ head target/hsqldb.metadata.xml 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://github.com/jinahya/sql/database/metadata/bind">
+    <allProceduresAreCallable>true</allProceduresAreCallable>
+    <allTablesAreSelectable>true</allTablesAreSelectable>
+    <autoCommitFailureClosesAllResultSets>false</autoCommitFailureClosesAllResultSets>
+    <catalog>
+        <tableCat>PUBLIC</tableCat>
+        <schema tableCatalog="PUBLIC">
+            <tableSchem>INFORMATION_SCHEMA</tableSchem>
+            <table tableCat="PUBLIC" tableSchem="INFORMATION_SCHEMA">
+$ 
 ```
