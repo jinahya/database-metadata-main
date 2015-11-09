@@ -1,13 +1,13 @@
 # database-metadata-main
 ## build
 ````
-mvn -Ddriver.groupId= -Ddrier.artifactId= -Ddriver.version= clean package
+$ mvn -Ddriver.groupId= -Ddrier.artifactId= -Ddriver.version= clean package
 ````
 Some profiles are prepared for various jdbc drivers.
 ````
-mvn help:all-profiles
-mvn -Pmariadb-java-client clean package
-mvn -Pmysql-connector-java -Ddriver.version=5.1.36 clean package
+$ mvn help:all-profiles
+$ mvn -Pmariadb-java-client clean package
+$ mvn -Pmysql-connector-java -Ddriver.version=5.1.36 clean package
 ````
 ## run
 Executes the final jar with following arguments.
@@ -17,7 +17,7 @@ Executes the final jar with following arguments.
   4. filename
   5. suppression*
 ```
-java -jar databse-metadata-main-....jar <url> <user> <pass> <outfile> suppression1 suppression2
+$ java -jar databse-metadata-main-....jar <url> <user> <pass> <outfile> suppression1 suppression2
 ```
 ## examples
 ### derby
