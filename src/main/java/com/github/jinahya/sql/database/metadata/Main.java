@@ -31,6 +31,7 @@ import javax.xml.bind.Marshaller;
 
 
 /**
+ * A main class for generating/storing database metadata.
  *
  * @author Jin Kwon &lt;jinahya_at_gmail.com&gt;
  */
