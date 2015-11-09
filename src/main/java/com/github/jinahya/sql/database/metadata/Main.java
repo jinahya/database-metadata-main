@@ -53,7 +53,6 @@ public class Main {
         throws ClassNotFoundException, SQLException,
                ReflectiveOperationException, JAXBException {
 
-        //Class.forName(DRIVER_NAME);
         final Metadata metadata;
 
         final Connection connection = getConnection(args[0], args[1], args[2]);
