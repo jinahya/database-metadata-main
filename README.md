@@ -6,8 +6,8 @@ mvn -Ddriver.groupId= -Ddrier.artifactId= -Ddriver.version= clean package
 Some profiles are prepared for various jdbc drivers.
 ````
 mvn help:all-profiles
-mvn -Pmariadb clean package
-mvn -Pmysql -Ddriver.version=5.1.36 clean package
+mvn -Pmariadb-java-client clean package
+mvn -Pmysql-connector-java -Ddriver.version=5.1.36 clean package
 ````
 ## run
 Executes the final jar with following arguments.
