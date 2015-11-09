@@ -1,10 +1,10 @@
 # database-metadata-main
 ## build
-````
+````bash
 $ mvn -Ddriver.groupId= -Ddrier.artifactId= -Ddriver.version= clean package
 ````
 Some profiles are prepared for various jdbc drivers.
-````
+````bash
 $ mvn help:all-profiles
 $ mvn -Pmariadb-java-client clean package
 $ mvn -Pmysql-connector-java -Ddriver.version=5.1.36 clean package
@@ -16,12 +16,12 @@ Executes the final jar with following arguments.
   3. password
   4. filename
   5. suppression*
-```
+```bash
 $ java -jar databse-metadata-main-....jar <url> <user> <pass> <outfile> suppression1 suppression2
 ```
 ## examples
 ### derby
-```
+```bash
 $ mvn -Pderby clean package
 $ java -jar target/...-derby-....jar "jdbc:derby:memory:test;create=true" "" "" \
 > target/derby.metadata.xml
@@ -41,7 +41,7 @@ $ head target/derby.metadata.xml
 $
 ```
 ### h2
-```
+```bash
 $ mvn -Ph2 clean package
 $ java -jar target/...-h2-....jar jdbc:h2:mem:test "" "" target/h2.metadata.xml \
 > schema/functions \
@@ -64,7 +64,7 @@ $ head target/h2.metadata.xml
 $ 
 ```
 ### hsqldb
-```
+```bash
 $ mvn -Phsqldb clean package
 $ java -jar target/...-hsqldb-....jar jdbc:hsqldb:mem:test "" "" target/hsqldb.metadata.xml \
 > table/pseudoColumns
