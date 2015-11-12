@@ -20,6 +20,7 @@ package com.github.jinahya.sql.database.metadata;
 
 import com.github.jinahya.sql.database.metadata.bind.Metadata;
 import com.github.jinahya.sql.database.metadata.bind.MetadataContext;
+import java.beans.IntrospectionException;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -44,24 +45,29 @@ public class Main {
      * @param args command line arguments;
      * {@code <url> <username> <password> <filename> <suppressionPath>...}
      *
-     * @throws ClassNotFoundException if the driver
-     * class({@code com.mysql.jdbc.Driver} not found
      * @throws SQLException if a database access error occurs
      * @throws ReflectiveOperationException if a reflection error occurs.
+     * @throws IntrospectionException
      * @throws JAXBException if an xml error occurs.
      */
     public static void main(final String[] args)
-        throws ClassNotFoundException, SQLException,
-               ReflectiveOperationException, JAXBException {
+        throws SQLException, ReflectiveOperationException,
+               IntrospectionException, JAXBException {
+
+        final String url = args[0];
+        final String user = args[1];
+        final String pass = args[2];
+
+        final String file = args[3];
 
         final Metadata metadata;
 
-        final Connection connection = getConnection(args[0], args[1], args[2]);
+        final Connection connection = getConnection(url, user, pass);
         try {
             final DatabaseMetaData database = connection.getMetaData();
             final MetadataContext context = new MetadataContext(database);
             for (int i = 4; i < args.length; i++) {
-                context.addSuppressionPaths(args[i]);
+                context.addSuppressions(args[i]);
             }
             metadata = context.getMetadata();
         } finally {
@@ -72,7 +78,7 @@ public class Main {
         final Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
-        marshaller.marshal(metadata, new File(args[3]));
+        marshaller.marshal(metadata, new File(file));
     }
 
 
