@@ -6,14 +6,14 @@
   <!-- The Basics -->
   <groupId>com.github.jinahya</groupId>
   <artifactId>database-metadata-main</artifactId>
-  <version>0.1</version>
+  <version>0.2</version>
   <packaging>jar</packaging>
   <dependencyManagement />
   <dependencies>
     <dependency>
       <groupId>com.github.jinahya</groupId>
       <artifactId>database-metadata-bind</artifactId>
-      <version>0.7</version>
+      <version>0.10</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -115,7 +115,7 @@
     <connection>scm:git:git@github.com:jinahya/database-metadata-main.git</connection>
     <developerConnection>scm:git:git@github.com:jinahya/database-metadata-main.git</developerConnection>
     <url>https://github.com/jinahya/database-metadata-main</url>
-    <tag>0.1</tag>
+    <tag>0.2</tag>
   </scm>
   <prerequisites />
   <repositories />
@@ -134,7 +134,23 @@
       </properties>
     </profile>
     <profile>
-      <id>mariadb</id>
+      <id>h2</id>
+      <properties>
+        <driver.groupId>com.h2database</driver.groupId>
+        <driver.artifactId>h2</driver.artifactId>
+        <driver.version>1.4.190</driver.version>
+      </properties>
+    </profile>
+    <profile>
+      <id>hsqldb</id>
+      <properties>
+        <driver.groupId>org.hsqldb</driver.groupId>
+        <driver.artifactId>hsqldb</driver.artifactId>
+        <driver.version>2.3.3</driver.version>
+      </properties>
+    </profile>
+    <profile>
+      <id>mariadb-java-client</id>
       <properties>
         <driver.groupId>org.mariadb.jdbc</driver.groupId>
         <driver.artifactId>mariadb-java-client</driver.artifactId>
@@ -142,7 +158,7 @@
       </properties>
     </profile>
     <profile>
-      <id>mysql</id>
+      <id>mysql-connector-java</id>
       <properties>
         <driver.groupId>mysql</driver.groupId>
         <driver.artifactId>mysql-connector-java</driver.artifactId>
