@@ -10,7 +10,7 @@ $ mvn -Pmariadb-java-client clean package
 $ mvn -Pmysql-connector-java -Ddriver.version=5.1.36 clean package
 ````
 ## run
-Executes the final jar with following arguments.
+Execute the final jar with following arguments.
   1. url
   2. username
   3. password
