@@ -13,7 +13,7 @@
     <dependency>
       <groupId>com.github.jinahya</groupId>
       <artifactId>database-metadata-bind</artifactId>
-      <version>0.11</version>
+      <version>0.16</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
