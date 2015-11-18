@@ -43,7 +43,7 @@ public class Main {
      * Connects to a database and marshals database metadata.
      *
      * @param args command line arguments;
-     * {@code <url> <username> <password> <filename> <suppressionPath>...}
+     * {@code <driver_name> <connection_url> <username> <password> <filename> <suppressionPath>...}
      *
      * @throws SQLException if a database access error occurs
      * @throws ReflectiveOperationException if a reflection error occurs.
@@ -51,14 +51,19 @@ public class Main {
      * @throws JAXBException if an xml error occurs.
      */
     public static void main(final String[] args)
-        throws SQLException, ReflectiveOperationException,
+        throws ClassNotFoundException, SQLException, ReflectiveOperationException,
                IntrospectionException, JAXBException {
 
-        final String url = args[0];
-        final String user = args[1];
-        final String pass = args[2];
+	final String name = args[0];
+        final String url = args[1];
+        final String user = args[2];
+        final String pass = args[3];
 
-        final String file = args[3];
+        final String file = args[4];
+
+	if (!name.isEmpty()) {
+	    Class.forName(name);
+	}
 
         final Metadata metadata;
 
@@ -66,7 +71,7 @@ public class Main {
         try {
             final DatabaseMetaData database = connection.getMetaData();
             final MetadataContext context = new MetadataContext(database);
-            for (int i = 4; i < args.length; i++) {
+            for (int i = 5; i < args.length; i++) {
                 context.addSuppressions(args[i]);
             }
             metadata = context.getMetadata();
