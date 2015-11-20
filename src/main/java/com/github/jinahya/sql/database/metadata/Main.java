@@ -156,7 +156,6 @@ public class Main {
 
 
     @Option(metaVar = "OUTPUT", name = "-o", usage = "output file path")
-    //@Option(name = "-o", required = true, usage = "output file path")
     private File file;
 
 
