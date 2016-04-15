@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-
 package com.github.jinahya.sql.database.metadata;
-
 
 import com.github.jinahya.sql.database.metadata.bind.Metadata;
 import com.github.jinahya.sql.database.metadata.bind.MetadataContext;
@@ -39,7 +36,6 @@ import org.kohsuke.args4j.spi.StringArrayOptionHandler;
 import org.slf4j.Logger;
 import static org.slf4j.LoggerFactory.getLogger;
 
-
 /**
  * A main class for generating/storing database metadata.
  *
@@ -47,9 +43,7 @@ import static org.slf4j.LoggerFactory.getLogger;
  */
 public class Main {
 
-
     private static final Logger logger = getLogger(Main.class);
-
 
     /**
      * Connects to a database and marshals database metadata.
@@ -66,14 +60,14 @@ public class Main {
      * @throws JAXBException if an xml error occurs.
      */
     public static void main(final String[] args)
-        throws IOException, ClassNotFoundException, SQLException,
-               ReflectiveOperationException, JAXBException {
+            throws IOException, ClassNotFoundException, SQLException,
+                   ReflectiveOperationException, JAXBException {
 
         final String hr = new String(new char[80]).replace("\0", "-");
         System.out.printf("\nDRIVER INFORMATION\n%s\n", hr);
         {
             final BufferedReader r = new BufferedReader(new InputStreamReader(
-                Main.class.getResourceAsStream("/driver.properties")));
+                    Main.class.getResourceAsStream("/driver.properties")));
             try {
                 for (String line; (line = r.readLine()) != null;) {
                     System.out.println(line);
@@ -92,10 +86,10 @@ public class Main {
             System.out.printf("\nAVAILABLE OPTIONS\n%s\n", hr);
             cle.getParser().printUsage(System.out);
             System.out.printf(
-                "\nEXAMPLE OPTIONS\n%s\n -c %s -l %s -u %s -p %s -s %s\n\n", hr,
-                "com.some.Driver", "\"jdbc:some:lcoalhost:...\"",
-                "\"user1234\"", "\"password1234\"",
-                "schema/UDTs table/pseudoColumns");
+                    "\nEXAMPLE OPTIONS\n%s\n -c %s -l %s -u %s -p %s -s %s\n\n", hr,
+                    "com.some.Driver", "\"jdbc:some:lcoalhost:...\"",
+                    "\"user1234\"", "\"password1234\"",
+                    "schema/UDTs table/pseudoColumns");
             return;
         }
 
@@ -107,18 +101,16 @@ public class Main {
 
         logger.debug("connecting...");
         final Connection connection
-            = getConnection(main.url, main.user, main.password);
+                = getConnection(main.url, main.user, main.password);
         try {
             logger.debug("connection: {}", connection);
             final DatabaseMetaData database = connection.getMetaData();
             logger.debug("database: {}", database);
             final MetadataContext context = new MetadataContext(database);
-            context.suppressUnknownColumns(true);
-            context.suppressUnknownMethods(true);
             if (main.suppressions != null) {
                 for (final String suppression : main.suppressions) {
                     logger.debug("suppressin: {}", suppression);
-                    context.addSuppressions(suppression);
+                    context.suppressions(suppression);
                 }
             }
             metadata = context.getMetadata();
@@ -135,33 +127,25 @@ public class Main {
         marshaller.marshal(metadata, main.file);
     }
 
-
     @Option(metaVar = "CLASS", name = "-n", usage = "driver class name")
     private String name;
-
 
     @Option(metaVar = "URL", name = "-l", required = true,
             usage = "connection url")
     private String url;
 
-
     @Option(metaVar = "USER", name = "-u", required = true,
             usage = "database user")
     private String user;
-
 
     @Option(metaVar = "PASSWORD", name = "-p", required = true,
             usage = "database password")
     private String password;
 
-
     @Option(metaVar = "OUTPUT", name = "-o", usage = "output file path")
     private File file;
-
 
     @Option(handler = StringArrayOptionHandler.class,
             metaVar = "SUPPRESSION...", name = "-s", usage = "suppressions")
     private List<String> suppressions;
-
 }
-
