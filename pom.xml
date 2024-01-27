@@ -162,7 +162,7 @@
       <properties>
         <driver.groupId>org.apache.derby</driver.groupId>
         <driver.artifactId>derby</driver.artifactId>
-        <driver.version>${derby.version}</driver.version>
+        <driver.version>10.17.1.0</driver.version>
       </properties>
     </profile>
     <profile>
@@ -170,7 +170,7 @@
       <properties>
         <driver.groupId>com.h2database</driver.groupId>
         <driver.artifactId>h2</driver.artifactId>
-        <driver.version>${h2.version}</driver.version>
+        <driver.version>10.17.1.0</driver.version>
       </properties>
     </profile>
     <profile>
@@ -178,7 +178,7 @@
       <properties>
         <driver.groupId>org.hsqldb</driver.groupId>
         <driver.artifactId>hsqldb</driver.artifactId>
-        <driver.version>${hsqldb.version}</driver.version>
+        <driver.version>10.17.1.0</driver.version>
       </properties>
     </profile>
     <profile>
@@ -186,7 +186,7 @@
       <properties>
         <driver.groupId>org.mariadb.jdbc</driver.groupId>
         <driver.artifactId>mariadb-java-client</driver.artifactId>
-        <driver.version>${mariadb-java-client.version}</driver.version>
+        <driver.version>10.17.1.0</driver.version>
       </properties>
     </profile>
     <profile>
@@ -194,7 +194,7 @@
       <properties>
         <driver.groupId>mysql</driver.groupId>
         <driver.artifactId>mysql-connector-java</driver.artifactId>
-        <driver.version>${mysql-connector-java.version}</driver.version>
+        <driver.version>10.17.1.0</driver.version>
       </properties>
     </profile>
     <profile>
@@ -202,7 +202,7 @@
       <properties>
         <driver.groupId>org.postgresql</driver.groupId>
         <driver.artifactId>postgresql</driver.artifactId>
-        <driver.version>${postgresql.version}</driver.version>
+        <driver.version>10.17.1.0</driver.version>
       </properties>
     </profile>
   </profiles>
